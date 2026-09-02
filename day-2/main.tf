@@ -3,9 +3,9 @@ data "aws_vpc" "default" {
 }
 
 resource "aws_security_group" "sg" {
-    name = "my-security_group"
+    name = "security_group"
     description = "my_group"
-    vpc_id = data.aws.vpc.default.id
+    vpc_id = data.aws_vpc.default.id
 
     ingress {
         from_port = 22
@@ -38,7 +38,7 @@ resource "aws_instance" "server" {
     vpc_security_group_ids = ["aws_security_group.sg.id"]
     
     user_data = file("/root/Terraform-/day-2/user_data.sh")
-    
+
     tags = {
         Name = "terraform-server"
     }

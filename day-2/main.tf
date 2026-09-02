@@ -3,7 +3,7 @@ data "aws_vpc" "default" {
 }
 
 resource "aws_security_group" "sg" {
-    name = "security_group"
+    name = "security_gr"
     description = "my_group"
     vpc_id = data.aws_vpc.default.id
 

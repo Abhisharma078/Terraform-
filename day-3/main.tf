@@ -124,9 +124,9 @@ resource "aws_instance" "web" {
 }
 
 resource "aws_instance" "ec2" {
-    ami = "ami-01a00762f46d584a1"
-    key_name = "abhi"
-    instance_type = "t3.micro"
+    ami = var.ami
+    key_name = var.key_name
+    instance_type = var.instance_type
     vpc_security_group_ids = [aws_security_group.sg.id]
     subnet_id = aws_subnet.private_subnet.id
 
@@ -135,8 +135,8 @@ resource "aws_instance" "ec2" {
    }
 
     root_block_device {
-        volume_size = 12
-        volume_type = "gp3"
+        volume_size = var.volume_size
+        volume_type = var.volume_type
     }
 }
 

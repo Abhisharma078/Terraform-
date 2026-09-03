@@ -32,9 +32,9 @@ resource "aws_security_group" "sg" {
 }
 
 resource "aws_instance" "server" {
-    ami = "ami-01a00762f46d584a1"
-    instance_type = "t3.micro"
-    key_name = "ubuntu"
+    ami = var.ami
+    instance_type = var.instance_type
+    key_name = var.key_name
     vpc_security_group_ids = [aws_security_group.sg.id]
 
     user_data = file("/root/Terraform-/day-2/user_data.sh")
@@ -43,7 +43,7 @@ resource "aws_instance" "server" {
         Name = "terraform-server"
     }
     root_block_device {
-        volume_size = 16
-        volume_type = "gp3"
+        volume_size = var.volume_size
+        volume_type = var.volume_type
     }
 }

@@ -7,7 +7,7 @@ output "private_ip" {
 }
 
 output "elastic_ip" {
-    value = aws_eip.web_eip.public_ip
+    value = aws_eip.nat_eip.public_ip
 }
 
 output "sg_id" {

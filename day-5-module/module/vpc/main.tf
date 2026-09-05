@@ -23,7 +23,7 @@ resource "aws_subnet" "private_subnet" {
     }
 }
 
-resource "aws_internt_gateway" "igw" {
+resource "aws_internet_gateway" "igw" {
     vpc_id = aws_vpc.vpc.id
 
    tags = {
@@ -52,15 +52,15 @@ resource "aws_route_table" "public_rt" {
     vpc_id = aws_vpc.vpc.id
     route {
         cidr_block = "0.0.0.0/0"
-        gateway_id = aws_internet_gateway_igw.id
+        gateway_id = aws_internet_gateway.igw.id
     }
     tags = {
         Name = "public_rt"
     }
 }
 
-resource "aws_route_table_assocation" "public_rt" {
-    subnet_id = aws_subent.public_subent.id
+resource "aws_route_table_association" "public_rt" {
+    subnet_id = aws_subent.public_subnet.id
     route_table_id = aws_route_table.public_rt.id
 }
   
@@ -77,7 +77,7 @@ resource "aws_route_table" "private_rt" {
 
 resource "aws_route_table_assocation" "private_rt" {
     subnet_id = aws_subnet.private_subnet.id
-    route_table_id = aws_route_table.praivate_rt.id
+    route_table_id = aws_route_table.private_rt.id
 }
 
 resource "aws_security_group" "sg" {
@@ -96,14 +96,14 @@ resource "aws_security_group" "sg" {
         from_port = var.http_port
         to_port = var.http_port
         protocol = "tcp"
-        cidr_blocks = "0.0.0.0/0"
+        cidr_blocks = ["0.0.0.0/0"]
     }
 
     egress {
         from_port = 0
         to_port = 0
         protocol = "-1"
-        cidr_blocks = "0.0.0.0/0"
+        cidr_blocks = ["0.0.0.0/0"]
     }
 }
 

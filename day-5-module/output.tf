@@ -1,3 +1,15 @@
 output "vpc_id" {
-    value = aws_vpc_id.vpc.id
+  value = module.vpc.vpc_id
+}
+
+output "public_subnet_id" {
+  value = module.vpc.public_subnet_id
+}
+
+output "private_subnet_id" {
+  value = module.vpc.private_subnet_id
+}
+
+output "sg_id" {
+  value = module.vpc.sg_id
 }

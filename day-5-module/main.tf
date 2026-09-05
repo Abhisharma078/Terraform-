@@ -9,3 +9,11 @@ module "vpc" {
     http_port = 80
     ssh_port = 22
 }
+
+module "ec2" {
+    source = "./module/ec2"
+    type = "t3.micro"
+    key_name = "ubuntu"
+    sg = module.vpc.sg_id
+    subnet = module.vpc.subnet_id
+}

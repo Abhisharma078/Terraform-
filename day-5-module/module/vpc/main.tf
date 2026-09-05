@@ -60,7 +60,7 @@ resource "aws_route_table" "public_rt" {
 }
 
 resource "aws_route_table_association" "public_rt" {
-    subnet_id = aws_subent.public_subnet.id
+    subnet_id = aws_subnet.public_subnet.id
     route_table_id = aws_route_table.public_rt.id
 }
   
@@ -75,7 +75,7 @@ resource "aws_route_table" "private_rt" {
     }
 }
 
-resource "aws_route_table_assocation" "private_rt" {
+resource "aws_route_table_association" "private_rt" {
     subnet_id = aws_subnet.private_subnet.id
     route_table_id = aws_route_table.private_rt.id
 }
@@ -89,7 +89,7 @@ resource "aws_security_group" "sg" {
         from_port = var.ssh_port
         to_port = var.ssh_port
         protocol = "tcp"
-        cidr_blocks = "0.0.0.0/0"
+        cidr_blocks = ["0.0.0.0/0"]
     }
 
     ingress {

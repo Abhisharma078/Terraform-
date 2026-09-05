@@ -15,5 +15,6 @@ module "ec2" {
     type = "t3.micro"
     key_name = "ubuntu"
     sg = module.vpc.sg_id
+    ami = "ami-01a00762f46d584a1"
     subnet = module.vpc.subnet_id
 }

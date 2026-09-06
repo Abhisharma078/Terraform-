@@ -18,4 +18,3 @@ output "private_subnet_2b_id" {
     value =  aws_subnet.private_subnet_2b.id
 }
 
-

@@ -96,7 +96,7 @@ resource "aws_route_table_association" "public_ass_2b" {
 
 resource "aws_route_table" "private_rt" {
     vpc_id = aws_vpc.vpc.id
-    route = {
+    route {
         cidr_block = var.route_cidr
         nat_gateway_id = aws_nat_gateway.nat.id
     }

@@ -13,3 +13,14 @@ module "vpc" {
     domain_name = "vpc"
     route_cidr = "0.0.0.0/0"
 }
+
+module "sg" {
+    source = "./module/security-group-sg"
+    vpc_id = module.vpc.vpc_id
+    ssh_port = 22
+    sg_proto = "tcp"
+    sg_cidr = ["0.0.0.0/0"]
+    http_port = 80
+    egress_port = 0
+    egress_proto = "-1" 
+}

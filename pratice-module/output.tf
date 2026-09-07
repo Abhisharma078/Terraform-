@@ -17,3 +17,7 @@ output "private_subnet_1a_id" {
 output "private_subnet_2b_id" {
     value =  module.vpc.private_subnet_2b_id
 }
+
+output "sg_id" {
+    value = module.security_group-sg.sg_id 
+}

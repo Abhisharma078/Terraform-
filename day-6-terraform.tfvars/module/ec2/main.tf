@@ -6,7 +6,7 @@ resource "aws_instance" "public" {
     subnet_id = var.public_sb_id
     associate_public_ip_address = true
     
-    user_data = file("/root/Terraform-/day-6-terraform.tfvars/mdoule/ec2/user_data.sh")
+    user_data = file("/root/Terraform-/day-6-terraform.tfvars/module/ec2/user_data.sh")
 
     tags = {
       Name = "public"

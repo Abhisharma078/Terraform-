@@ -17,7 +17,7 @@ resource "aws_instance" "private" {
     ami = var.ami
     key_name = var.key_name
     instance_type = var.instance_type
-    vpc_security_group_ids = [var.server.sg]
+    vpc_security_group_ids = [var.server_sg]
     subnet_id = var.private_sb_id
     associate_public_ip_address = false
 

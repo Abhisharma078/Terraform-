@@ -22,7 +22,7 @@ module "ec2" {
     ami = var.ami
     key_name = var.key_name
     instance_type = var.instance_type
-    server_sg = module.vpc.sg.sg_id
+    server_sg = module.vpc.sg.id
     public_sb_id = module.vpc.public_subnet_id
     private_sb_id = module.vpc.private_subnet_id
 }

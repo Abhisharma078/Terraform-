@@ -19,5 +19,5 @@ output "private_subnet_2b_id" {
 }
 
 output "sg_id" {
-    value = module.security-group-sg.sg_id 
+    value = module.sg.sg_id 
 }

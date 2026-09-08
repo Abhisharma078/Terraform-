@@ -5,6 +5,7 @@ provider "aws" {
 
 terraform {
   backend "s3" {
+    bucket = "abhicloud.online"
     region = "ap-south-1"
     profile = "abhi"
     shared_credentials_files = ["/root/.aws/credentials"]

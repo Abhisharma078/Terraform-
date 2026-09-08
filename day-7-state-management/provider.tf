@@ -7,7 +7,7 @@ terraform {
   backend "s3" {
     region = "ap-south-1"
     profile = "abhi"
-    shared_credentails_files = ["/root/.aws/credentails"]
+    shared_credentails_files = ["/root/.aws/credentials"]
     key = "terraform.tfstate"
     use_lockfile = true
   }

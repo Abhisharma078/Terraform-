@@ -66,7 +66,7 @@ resource "aws_iam_role_policy_attachment" "node_policies" {
 #cluster create
 
 resource "aws_eks_cluster" "mycluster" {
-    name = mycluster
+    name = "mycluster"
 
     role_arn = aws_iam_role.eks_cluster_role.arn
     version = "1.36"

@@ -15,8 +15,8 @@ data "aws_subnets" "default" {
 
 # create cluster role
 
-resource "aws_iam_role" "eks_cluster_role" {
-    name = "eks-cluster-role"
+resource "aws_iam_role" "cluster_role" {
+    name = "cluster_role"
 
     assume_role_policy = jsonencode({
         Version = "2012-10-17"
@@ -31,14 +31,14 @@ resource "aws_iam_role" "eks_cluster_role" {
 #create cluster policy
 
 resource "aws_iam_role_policy_attachment" "eks_cluster_policy" {
-    role = aws_iam_role.eks_cluster_role.name
+    role = aws_iam_role.cluster_role.name
     policy_arn = "arn:aws:iam::aws:policy//AmazonEKSClusterPolicy"  
 }
 
 #create node role
 
-resource "aws_iam_role" "node_cluster_role" {
-    name = "node-cluster-role"
+resource "aws_iam_role" "node_role" {
+    name = "node_role"
 
     assume_role_policy = jsonencode({
         Version = "2012-10-17"
@@ -54,7 +54,7 @@ resource "aws_iam_role" "node_cluster_role" {
 
 resource "aws_iam_role_policy_attachment" "node_policies" {
     count = 3
-    role = aws_iam_role.node_cluster_role.name
+    role = aws_iam_role.node_role.name
 
     policy_arn = element([
       "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
@@ -68,7 +68,7 @@ resource "aws_iam_role_policy_attachment" "node_policies" {
 resource "aws_eks_cluster" "mycluster" {
     name = "mycluster"
 
-    role_arn = aws_iam_role.eks_cluster_role.arn
+    role_arn = aws_iam_role.cluster_role.arn
     version = "1.36"
 
     vpc_config {
@@ -83,7 +83,7 @@ resource "aws_eks_cluster" "mycluster" {
 resource "aws_eks_node_group" "nodegroup" {
     cluster_name = aws_eks_cluster.mycluster.name
     node_group_name = "nodegroup"
-    node_role_arn = aws_iam_role.node_cluster_role.arn
+    node_role_arn = aws_iam_role.node_role.arn
     subnet_ids = data.aws_subnets.default.ids
     instance_types = ["t3.micro"]
 

@@ -8,7 +8,7 @@ data "aws_vpc" "default" {
 
 data "aws_subnets" "default" {
     filter {
-      name = vpc-id
+      name = "vpc-id"
       values = [data.aws_vpc.default.id]       
     }
 }
@@ -32,7 +32,7 @@ resource "aws_iam_role" "eks_cluster_role" {
 
 resource "aws_iam_role_policy_attachment" "eks_cluster_policy" {
     role = aws_iam_role.eks_cluster_role.name
-    policy_arn = "arn:aws:iam:aws:policy//AmazonEKSClusterPolicy"  
+    policy_arn = "arn:aws:iam::aws:policy//AmazonEKSClusterPolicy"  
 }
 
 #create node role
@@ -54,7 +54,7 @@ resource "aws_iam_role" "node_cluster_role" {
 
 resource "aws_iam_role_policy_attachment" "node_policies" {
     count = 3
-    role = aws_iam_role.node_role.name
+    role = aws_iam_role.node_cluster_role.name
 
     policy_arn = element([
       "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",

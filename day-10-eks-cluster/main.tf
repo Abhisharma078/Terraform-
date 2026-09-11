@@ -32,7 +32,7 @@ resource "aws_iam_role" "cluster_role" {
 
 resource "aws_iam_role_policy_attachment" "eks_cluster_policy" {
     role = aws_iam_role.cluster_role.name
-    policy_arn = "arn:aws:iam::aws:policy//AmazonEKSClusterPolicy"  
+    policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"  
 }
 
 #create node role
